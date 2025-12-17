@@ -115,3 +115,7 @@ python main_bayes.py bayes_yaml/discrete/gcn_cora_discrete_slt_global_epl.yml
 ```bash
 python main_bayes.py bayes_yaml/continuous/lenet_mnist_continuous_slt_global_layerwise.yml
 ```
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
