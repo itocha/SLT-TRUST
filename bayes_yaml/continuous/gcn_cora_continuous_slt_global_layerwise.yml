@@ -1,0 +1,197 @@
+seed: 42
+
+# Fixed parameters for GCN + Cora
+fixed_params:
+  model: "gcn"
+  dataset: "cora"
+  epochs: 100
+  num_repeats: 1
+  optimizer_name: "adamw"
+  lr: 0.01
+  weight_decay: 5e-4
+  partial_frozen_slt: true
+  m_init_method: "layer_wise"
+  ep_algo: "global_ep"
+  num_layers: 4
+
+# tunable parameters (unconstrained)
+params:
+  layer_1_pruned_frozen: <float>
+  layer_1_pruned_frozen_space: [-1.0, 1.0]  # continuous values
+  layer_1_pruned_frozen_type: "continuous"
+  layer_1_locked_frozen: <float>
+  layer_1_locked_frozen_space: [-1.0, 1.0]  # continuous values
+  layer_1_locked_frozen_type: "continuous"
+  layer_1_prune_nfrozen: <float>
+  layer_1_prune_nfrozen_space: [-1.0, 1.0]  # continuous values
+  layer_1_prune_nfrozen_type: "continuous"
+  layer_1_lock_nfrozen: <float>
+  layer_1_lock_nfrozen_space: [-1.0, 1.0]  # continuous values
+  layer_1_lock_nfrozen_type: "continuous"
+  layer_2_pruned_frozen: <float>
+  layer_2_pruned_frozen_space: [-1.0, 1.0]  # continuous values
+  layer_2_pruned_frozen_type: "continuous"
+  layer_2_locked_frozen: <float>
+  layer_2_locked_frozen_space: [-1.0, 1.0]  # continuous values
+  layer_2_locked_frozen_type: "continuous"
+  layer_2_prune_nfrozen: <float>
+  layer_2_prune_nfrozen_space: [-1.0, 1.0]  # continuous values
+  layer_2_prune_nfrozen_type: "continuous"
+  layer_2_lock_nfrozen: <float>
+  layer_2_lock_nfrozen_space: [-1.0, 1.0]  # continuous values
+  layer_2_lock_nfrozen_type: "continuous"
+  layer_3_pruned_frozen: <float>
+  layer_3_pruned_frozen_space: [-1.0, 1.0]  # continuous values
+  layer_3_pruned_frozen_type: "continuous"
+  layer_3_locked_frozen: <float>
+  layer_3_locked_frozen_space: [-1.0, 1.0]  # continuous values
+  layer_3_locked_frozen_type: "continuous"
+  layer_3_prune_nfrozen: <float>
+  layer_3_prune_nfrozen_space: [-1.0, 1.0]  # continuous values
+  layer_3_prune_nfrozen_type: "continuous"
+  layer_3_lock_nfrozen: <float>
+  layer_3_lock_nfrozen_space: [-1.0, 1.0]  # continuous values
+  layer_3_lock_nfrozen_type: "continuous"
+  layer_4_pruned_frozen: <float>
+  layer_4_pruned_frozen_space: [-1.0, 1.0]  # continuous values
+  layer_4_pruned_frozen_type: "continuous"
+  layer_4_locked_frozen: <float>
+  layer_4_locked_frozen_space: [-1.0, 1.0]  # continuous values
+  layer_4_locked_frozen_type: "continuous"
+  layer_4_prune_nfrozen: <float>
+  layer_4_prune_nfrozen_space: [-1.0, 1.0]  # continuous values
+  layer_4_prune_nfrozen_type: "continuous"
+  layer_4_lock_nfrozen: <float>
+  layer_4_lock_nfrozen_space: [-1.0, 1.0]  # continuous values
+  layer_4_lock_nfrozen_type: "continuous"
+
+  # Derived parameters (will be calculated from unconstrained parameters)
+  pruning_rate: <float>
+  p_ratio: <float>
+  r_ratio: <float>
+
+  num_bayes_layers: <int>
+  num_bayes_layers_space: [1, 2, 3]  # discrete range for integer
+  num_bayes_layers_type: "discrete"  # "discrete" or "continuous"
+  dropout_rate: <float>
+  dropout_rate_space: [0.05, 0.5]  # continuous range
+  dropout_rate_type: "continuous"  # "discrete" or "continuous"
+
+# evaluation metrics
+eval:
+  accuracy: <float>
+  ece: <float>
+  ape: <float>
+  flops: <float>
+  memory: <float>
+
+bayes_opt:
+  iteration: <int>
+  terminate: <bool>
+  engine: <obj>
+  score: <float>
+  summary: <list>
+  control:
+    params: dict
+    metrics: dict
+    suggests: dict
+
+  num_iter: 1000
+  seed: ((seed))
+  tunable:
+    layer_1_pruned_frozen:
+       value: ((params.layer_1_pruned_frozen))
+       space: ((params.layer_1_pruned_frozen_space))
+       type: ((params.layer_1_pruned_frozen_type))
+    layer_1_locked_frozen:
+       value: ((params.layer_1_locked_frozen))
+       space: ((params.layer_1_locked_frozen_space))
+       type: ((params.layer_1_locked_frozen_type))
+    layer_1_prune_nfrozen:
+       value: ((params.layer_1_prune_nfrozen))
+       space: ((params.layer_1_prune_nfrozen_space))
+       type: ((params.layer_1_prune_nfrozen_type))
+    layer_1_lock_nfrozen:
+       value: ((params.layer_1_lock_nfrozen))
+       space: ((params.layer_1_lock_nfrozen_space))
+       type: ((params.layer_1_lock_nfrozen_type))
+    layer_2_pruned_frozen:
+       value: ((params.layer_2_pruned_frozen))
+       space: ((params.layer_2_pruned_frozen_space))
+       type: ((params.layer_2_pruned_frozen_type))
+    layer_2_locked_frozen:
+       value: ((params.layer_2_locked_frozen))
+       space: ((params.layer_2_locked_frozen_space))
+       type: ((params.layer_2_locked_frozen_type))
+    layer_2_prune_nfrozen:
+       value: ((params.layer_2_prune_nfrozen))
+       space: ((params.layer_2_prune_nfrozen_space))
+       type: ((params.layer_2_prune_nfrozen_type))
+    layer_2_lock_nfrozen:
+       value: ((params.layer_2_lock_nfrozen))
+       space: ((params.layer_2_lock_nfrozen_space))
+       type: ((params.layer_2_lock_nfrozen_type))
+    layer_3_pruned_frozen:
+       value: ((params.layer_3_pruned_frozen))
+       space: ((params.layer_3_pruned_frozen_space))
+       type: ((params.layer_3_pruned_frozen_type))
+    layer_3_locked_frozen:
+       value: ((params.layer_3_locked_frozen))
+       space: ((params.layer_3_locked_frozen_space))
+       type: ((params.layer_3_locked_frozen_type))
+    layer_3_prune_nfrozen:
+       value: ((params.layer_3_prune_nfrozen))
+       space: ((params.layer_3_prune_nfrozen_space))
+       type: ((params.layer_3_prune_nfrozen_type))
+    layer_3_lock_nfrozen:
+       value: ((params.layer_3_lock_nfrozen))
+       space: ((params.layer_3_lock_nfrozen_space))
+       type: ((params.layer_3_lock_nfrozen_type))
+    layer_4_pruned_frozen:
+       value: ((params.layer_4_pruned_frozen))
+       space: ((params.layer_4_pruned_frozen_space))
+       type: ((params.layer_4_pruned_frozen_type))
+    layer_4_locked_frozen:
+       value: ((params.layer_4_locked_frozen))
+       space: ((params.layer_4_locked_frozen_space))
+       type: ((params.layer_4_locked_frozen_type))
+    layer_4_prune_nfrozen:
+       value: ((params.layer_4_prune_nfrozen))
+       space: ((params.layer_4_prune_nfrozen_space))
+       type: ((params.layer_4_prune_nfrozen_type))
+    layer_4_lock_nfrozen:
+       value: ((params.layer_4_lock_nfrozen))
+       space: ((params.layer_4_lock_nfrozen_space))
+       type: ((params.layer_4_lock_nfrozen_type))
+    num_bayes_layers:
+       value: ((params.num_bayes_layers))
+       space: ((params.num_bayes_layers_space))
+       type: ((params.num_bayes_layers_type))
+    dropout_rate:
+       value: ((params.dropout_rate))
+       space: ((params.dropout_rate_space))
+       type: ((params.dropout_rate_type))
+
+  metrics:
+    accuracy: ((eval.accuracy))
+    ece: ((eval.ece))
+    ape: ((eval.ape))
+    flops: ((eval.flops))
+    memory: ((eval.memory))
+
+  score_weights:
+    accuracy:
+      weight: 0.4
+      base: 80
+    ece:
+      weight: 0.2
+      base: -60
+    ape:
+      weight: 0.2
+      base: 1.5
+    flops:
+      weight: 0.1
+      base: -6000
+    memory:
+      weight: 0.1
+      base: -0.045
